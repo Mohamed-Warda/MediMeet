@@ -1,3 +1,5 @@
+using AppointmentBooking.Api;
+using AppointmentBooking.Infrastructure;
 using DoctorAvailability.Api;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddDAModule();
+builder.Services.AddABModule().AddABMInfra();
 
 
 var app = builder.Build();
