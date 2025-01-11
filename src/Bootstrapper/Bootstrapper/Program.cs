@@ -1,5 +1,6 @@
 using AppointmentBooking.Api;
 using AppointmentBooking.Infrastructure;
+using AppointmentConfirmation.Api;
 using DoctorAvailability.Api;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 #region Modules Registration
 builder.Services.AddDAModule();
 builder.Services.AddABModule().AddABMInfra();
+builder.Services.AddACModule();
 #endregion
 
 
@@ -19,8 +21,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
