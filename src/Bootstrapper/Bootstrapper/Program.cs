@@ -2,6 +2,8 @@ using AppointmentBooking.Api;
 using AppointmentBooking.Infrastructure;
 using AppointmentConfirmation.Api;
 using DoctorAvailability.Api;
+using Shared;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddDAModule();
 builder.Services.AddABModule().AddABMInfra();
 builder.Services.AddACModule();
+builder.Services.AddShared();
+
 #endregion
 
 
