@@ -2,21 +2,28 @@
 using AppointmentBooking.Domain.IRepository;
 using AppointmentBooking.Infrastructure.Database;
 using AppointmentBooking.Infrastructure.Extentions;
+using MediatR;
 
 namespace AppointmentBooking.Infrastructure.Repository;
 
-public class 
-    AppointmentRepository: IAppointmentRepository
+public class
+    AppointmentRepository : IAppointmentRepository
 {
+    private readonly IMediator _mediator;
 
-    public AppointmentRepository()
+    public AppointmentRepository(IMediator mediator)
     {
+        _mediator = mediator;
     }
-    
-    public Guid CreateAppointment(Appointment appointment)
-    { 
+
+    public async Task<Guid> CreateAppointment(Appointment appointment)
+    {
         var entity = appointment.ToEntity();
         InMemoryDb.Appointments.Add(entity);
+        foreach (var domainEvent in appointment.DomainEvents)
+        {
+            await _mediator.Publish(domainEvent);
+        }
         return entity.Id;
     }
 }

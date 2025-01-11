@@ -10,7 +10,8 @@ public static class DependencyInjection
     {
        
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-        
+        services.AddMediatR(m=> m.RegisterServicesFromAssemblyContaining<IAppointmentRepository>()); 
+
 
         return services;
     }

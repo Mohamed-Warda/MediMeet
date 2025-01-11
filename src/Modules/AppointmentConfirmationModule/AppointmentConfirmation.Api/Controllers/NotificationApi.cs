@@ -17,12 +17,14 @@ namespace AppointmentConfirmation.Api.Controllers
 			foreach (var receiver in receivers)
 			{
 				var notification = $"""
-					```
+					==============================
+					
 					Receiver: {receiver}
 
 					Message:
 					{message}
-					```
+					
+					==============================
 					""";
 				logger.LogInformation(notification);
 			}

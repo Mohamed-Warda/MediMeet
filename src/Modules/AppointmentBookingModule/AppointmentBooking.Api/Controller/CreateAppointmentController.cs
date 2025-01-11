@@ -13,8 +13,8 @@ public class CreateAppointmentController: ControllerBase
         _createAppointmentHandler = createAppointmentHandler;
     }
     [HttpPost("create")]
-    public Guid Create([FromBody]CreateAppointmentRequest request)
+    public async Task<Guid> Create([FromBody]CreateAppointmentRequest request)
     {
-        return _createAppointmentHandler.CreateAppointment(request);
+        return await _createAppointmentHandler.CreateAppointment(request);
     }
 }

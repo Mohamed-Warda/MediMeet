@@ -4,6 +4,6 @@ namespace AppointmentBooking.Domain.IRepository;
 
 public interface IAppointmentRepository
 {
-    Guid CreateAppointment(Appointment appointment);
+    Task<Guid> CreateAppointment(Appointment appointment);
 
 }

@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using AppointmentBooking.Domain.DomainEvents;
+using Shared.RootEntity;
 
 namespace AppointmentBooking.Domain.DomainModels;
 
-public class Appointment
+public class Appointment:Entity
 {
   
     public Guid Id { get; set; }
@@ -28,6 +30,8 @@ public class Appointment
             Status = AppointmentStatus.Pending,
             ReservedAt= reservedAt
         };
+
+        appointment.RaiseDomainEvent(new CreateAppointmentDomainEvent(appointment.PatientName, appointment.DoctorName, appointment.ReservedAt));
 
         return appointment;
     }
