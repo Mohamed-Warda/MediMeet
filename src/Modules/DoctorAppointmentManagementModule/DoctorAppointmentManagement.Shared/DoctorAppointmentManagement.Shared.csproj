@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\AppointmentBookingModule\AppointmentBooking.Infrastructure\AppointmentBooking.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
