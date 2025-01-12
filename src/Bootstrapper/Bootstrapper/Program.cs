@@ -1,6 +1,8 @@
 using AppointmentBooking.Api;
 using AppointmentBooking.Infrastructure;
 using AppointmentConfirmation.Api;
+using DoctorAppointmentManagement.AdapterInfra;
+using DoctorAppointmentManagement.Core;
 using DoctorAvailability.Api;
 using Shared;
 
@@ -15,6 +17,8 @@ builder.Services.AddControllers();
 builder.Services.AddDAModule();
 builder.Services.AddABModule().AddABMInfra();
 builder.Services.AddACModule();
+builder.Services.AddDAMModule().AddDAMInfra();
+
 builder.Services.AddShared();
 
 #endregion

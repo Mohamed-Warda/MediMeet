@@ -12,7 +12,7 @@ namespace AppointmentBooking.Application.AppointmentBookingShared
 		{
 			_appointmentRepository = appointmentRepository;
 		}
-		public async Task<List<AppointmentDto>> GetUpCommingAppointments()
+		public async Task<List<AppointmentDto>> GetUpComingAppointments()
 		{
 			var appointments = await _appointmentRepository.GetUpCommingAppointments();
 			var appointmentDtos = appointments.Select(a => new AppointmentDto

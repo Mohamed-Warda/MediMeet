@@ -4,6 +4,6 @@ namespace AppointmentBooking.Shared.Contracts
 {
 	public interface IAppointmentBookingApi
 	{
-		Task<List<AppointmentDto>> GetUpCommingAppointments();
+		Task<List<AppointmentDto>> GetUpComingAppointments();
 	}
 }
