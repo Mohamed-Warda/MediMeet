@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAppointmentManagement
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBooking.Shared", "src\Modules\AppointmentBookingModule\AppointmentBooking.Shared\AppointmentBooking.Shared.csproj", "{04F3D513-3FF6-4BB1-A923-8F99865C580C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAvailability.Shared", "src\Modules\DoctorAvailabilityModule\DoctorAvailability.Shared\DoctorAvailability.Shared.csproj", "{70367A67-F93C-4275-854D-FCAC7E86945F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,10 @@ Global
 		{04F3D513-3FF6-4BB1-A923-8F99865C580C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F3D513-3FF6-4BB1-A923-8F99865C580C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F3D513-3FF6-4BB1-A923-8F99865C580C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70367A67-F93C-4275-854D-FCAC7E86945F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70367A67-F93C-4275-854D-FCAC7E86945F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70367A67-F93C-4275-854D-FCAC7E86945F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70367A67-F93C-4275-854D-FCAC7E86945F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{277D31F4-E6F1-46B5-A21D-6B0303F2EDEE} = {409F5A69-76E5-410E-9D95-049743E96899}
 		{815B3A48-66A8-40D0-A286-29C5D0CCA2E5} = {B31FCD68-AF45-41D7-87BA-7FA8434D604F}
 		{04F3D513-3FF6-4BB1-A923-8F99865C580C} = {B774FE7E-0C97-4B50-A99F-1ABCAC72AD30}
+		{70367A67-F93C-4275-854D-FCAC7E86945F} = {045B2EB4-56D4-490E-A516-360D5B3BFD06}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5A36B23-56E8-4C45-9037-C989571C37EC}

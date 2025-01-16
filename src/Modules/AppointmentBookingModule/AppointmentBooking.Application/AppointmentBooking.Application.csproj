@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\AppointmentConfirmationModule\AppointmentConfirmation.Shared\AppointmentConfirmation.Shared.csproj" />
+      <ProjectReference Include="..\..\DoctorAvailabilityModule\DoctorAvailability.Shared\DoctorAvailability.Shared.csproj" />
       <ProjectReference Include="..\AppointmentBooking.Domain\AppointmentBooking.Domain.csproj" />
       <ProjectReference Include="..\AppointmentBooking.Shared\AppointmentBooking.Shared.csproj" />
     </ItemGroup>

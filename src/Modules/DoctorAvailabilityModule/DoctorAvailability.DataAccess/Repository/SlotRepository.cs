@@ -27,4 +27,20 @@ public class SlotRepository: ISlotRepository
     {
         InMemoryDb.Slots.Add(slot);
     }
+    
+    public Slot GetById(Guid slotId)
+    {
+     return   InMemoryDb.Slots.FirstOrDefault(s=>s.Id==slotId);
+    }
+    
+    public void Update(Slot slot)
+    {
+        var slotToUpdate = InMemoryDb.Slots.FirstOrDefault(s => s.Id == slot.Id);
+        if (slotToUpdate is  null)
+        {
+            return;
+        }
+        InMemoryDb.Slots.Remove(slotToUpdate);
+        InMemoryDb.Slots.Add(slot);
+    }
 }

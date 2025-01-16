@@ -8,7 +8,7 @@ public class Appointment:Entity
 {
   
     public Guid Id { get; set; }
-    public int SlotId { get; set; }
+    public Guid SlotId { get; set; }
     public int PatientId { get; set; }
     public string PatientName { get; set; }
     public string DoctorName { get; set; }
@@ -18,7 +18,7 @@ public class Appointment:Entity
     
     //Add Validation and ctor
     //factory method is better than constructor as it show intention
-    public static Appointment CreateAppointment( int slotId, int patientId, string patientName, string doctorName,DateTime reservedAt)
+    public static Appointment CreateAppointment( Guid slotId, int patientId, string patientName, string doctorName,DateTime reservedAt)
     {
         var appointment = new Appointment
         {
@@ -31,7 +31,7 @@ public class Appointment:Entity
             ReservedAt= reservedAt
         };
 
-        appointment.RaiseDomainEvent(new CreateAppointmentDomainEvent(appointment.PatientName, appointment.DoctorName, appointment.ReservedAt));
+        appointment.RaiseDomainEvent(new CreateAppointmentDomainEvent(appointment.PatientName, appointment.DoctorName, appointment.ReservedAt,appointment.SlotId));
 
         return appointment;
     }

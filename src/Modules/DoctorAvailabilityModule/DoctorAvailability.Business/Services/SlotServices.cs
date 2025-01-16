@@ -24,11 +24,22 @@ public class SlotServices
 
     public List<SlotDto> GetAllAvailable()
     {
-        return _slotRepository.GetAllAvailable().Select(s=>s.MapToDto()).ToList();
+        return _slotRepository.GetAllAvailable().Where(s=>!s.IsReserved).Select(s=>s.MapToDto()).ToList();
     }
-
     public List<SlotDto> GetAll()
     {
         return  _slotRepository.GetAll().Select(s => s.MapToDto()).ToList();
+    }
+    public bool ReserveSlot(Guid slotId)
+    {
+        var slot = _slotRepository.GetById(slotId);
+        if (slot == null)
+        {
+            return false;
+        }
+
+        slot.IsReserved = true;
+        _slotRepository.Update(slot);
+        return true;
     }
 }

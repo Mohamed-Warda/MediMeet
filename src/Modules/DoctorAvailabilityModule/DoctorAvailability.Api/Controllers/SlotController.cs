@@ -33,4 +33,9 @@ public class SlotController : ControllerBase
     {
         return Ok(_slotServices.GetAllAvailable());
     }
+    [HttpGet("get-all")]
+    public IActionResult GetAll()
+    {
+        return Ok(_slotServices.GetAll());
+    }
 }
