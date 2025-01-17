@@ -9,6 +9,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\AppointmentBookingModule\AppointmentBooking.Shared\AppointmentBooking.Shared.csproj" />
     <ProjectReference Include="..\..\Core\DoctorAppointmentManagement.Core\DoctorAppointmentManagement.Core.csproj" />
+    <ProjectReference Include="..\..\DoctorAppointmentManagement.Shared\DoctorAppointmentManagement.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
 </Project>

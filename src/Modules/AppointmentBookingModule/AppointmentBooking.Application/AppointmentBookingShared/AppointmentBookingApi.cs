@@ -14,7 +14,7 @@ namespace AppointmentBooking.Application.AppointmentBookingShared
 		}
 		public async Task<List<AppointmentDto>> GetUpComingAppointments()
 		{
-			var appointments = await _appointmentRepository.GetUpCommingAppointments();
+			var appointments = await _appointmentRepository.GetUpComingAppointments();
 			var appointmentDtos = appointments.Select(a => new AppointmentDto
 			{
 				Id = a.Id,

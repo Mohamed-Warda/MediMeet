@@ -4,16 +4,20 @@ using DoctorAppointmentManagement.AdapterInfra.Extension;
 using DoctorAppointmentManagement.Core.Domain.Enums;
 using DoctorAppointmentManagement.Core.Models;
 using DoctorAppointmentManagement.Core.OutputPorts.IRepository;
+using DoctorAppointmentManagement.Shared.IntegrationEvents;
+using MediatR;
 
 namespace DoctorAppointmentManagement.AdapterInfra.Repository
 {
 	public class AppointmentRepository : IAppointmentRepository
 	{
 		private readonly IAppointmentBookingApi _appointmentBookingApi;
+		private readonly IMediator _mediator;
 
-		public AppointmentRepository(IAppointmentBookingApi appointmentBookingApi)
+		public AppointmentRepository(IAppointmentBookingApi appointmentBookingApi,IMediator mediator)
 		{
 			_appointmentBookingApi = appointmentBookingApi;
+			_mediator = mediator;
 		}
 
 
@@ -46,8 +50,10 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 				AppointmentStatus = AppointmentStatus.Confirmed,
 				ReservedAt = appointment.ReservedAt
 			};
+			//update appoint cofirmetion
 			var entity = AppointmentConfirmation.ToEntity();
 			InMemoryDb.AppointmentConfirmation.Add(entity);
+			await _mediator.Publish(new  AppointmentConfirmedEvent(appointment.Id));
 			return entity.ToModel();
 
 		}
@@ -66,8 +72,11 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 				AppointmentStatus = AppointmentStatus.Cancelled,
 				ReservedAt = appointment.ReservedAt
 			};
+			//delete the appintment from other module 
+			// delete slot  
 			var entity = AppointmentConfirmation.ToEntity();
 			InMemoryDb.AppointmentConfirmation.Add(entity);
+			 await _mediator.Publish(new  AppointmentCanceledEvent(appointment.Id,appointment.SlotId));
 			return entity.ToModel();
 		}
 	}

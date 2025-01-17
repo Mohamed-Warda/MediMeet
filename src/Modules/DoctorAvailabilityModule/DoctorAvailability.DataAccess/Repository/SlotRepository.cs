@@ -15,13 +15,16 @@ public class SlotRepository: ISlotRepository
         return InMemoryDb.Slots.Where(s =>  !s.IsReserved).ToList();
     }
 
-    public void DeleteById(Guid slotId)
+    public bool DeleteById(Guid slotId)
     {
         var slot = InMemoryDb.Slots.FirstOrDefault(s => s.Id == slotId);
         if (slot != null)
         {
             InMemoryDb.Slots.Remove(slot);
+            return true;
         }
+
+        return false;
     }
     public void Create(Slot slot)
     {

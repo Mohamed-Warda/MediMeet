@@ -27,7 +27,8 @@ public class
 		return entity.Id;
 	}
 
-	public Task<List<Appointment>> GetUpCommingAppointments()
+
+	public Task<List<Appointment>> GetUpComingAppointments()
 	{
 		var Appointment = InMemoryDb.Appointments.Where(x => x.Status == AppointmentStatus.Pending).ToList();
 		var Models = Appointment.Select(x => x.ToModel()).ToList();
@@ -36,8 +37,24 @@ public class
 
 	}
 
-	public Task<Appointment> UpdateAppointment(Appointment appointment)
+	public bool ConfirmAppointment(Guid appointmentId)
 	{
-		throw new NotImplementedException();
+		var appointment = InMemoryDb.Appointments.FirstOrDefault(x => x.Id == appointmentId);
+		if (appointment is null)
+		{
+			return false;
+		}
+		appointment.Status =AppointmentStatus.Confirmed;
+		return true;
+	}
+	public bool CancelAppointment(Guid appointmentId)
+	{
+		var appointment = InMemoryDb.Appointments.FirstOrDefault(x => x.Id == appointmentId);
+		if (appointment is null)
+		{
+			return false;
+		}
+		appointment.Status =AppointmentStatus.Cancelled;
+		return true;
 	}
 }
