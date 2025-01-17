@@ -35,8 +35,6 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 			if (appointment == null)
 				throw new ArgumentNullException(nameof(appointment));
 
-			await Task.Delay(10);
-
 			return new AppointmentConfirmation
 			{
 				Id = appointment.Id,
@@ -53,9 +51,6 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 			if (appointment == null)
 				throw new ArgumentNullException(nameof(appointment));
 
-
-			await Task.Delay(10);
-
 			return new AppointmentConfirmation
 			{
 				Id = appointment.Id,
@@ -66,8 +61,5 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 				ReservedAt = appointment.ReservedAt
 			};
 		}
-
-
-
 	}
 }
