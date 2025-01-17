@@ -2,7 +2,7 @@
 
 namespace Shared.EventBus;
 
-public interface IDomainEventHandler<Event>:INotificationHandler<Event> where Event:IDomainEvent
+public interface IDomainEventHandler<in TEvent>:INotificationHandler<TEvent> where TEvent:IDomainEvent
 {
     
 }
