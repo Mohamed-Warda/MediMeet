@@ -1,4 +1,6 @@
 ﻿using AppointmentBooking.Shared.Contracts;
+using DoctorAppointmentManagement.AdapterInfra.Database;
+using DoctorAppointmentManagement.AdapterInfra.Extension;
 using DoctorAppointmentManagement.Core.Domain.Enums;
 using DoctorAppointmentManagement.Core.Models;
 using DoctorAppointmentManagement.Core.OutputPorts.IRepository;
@@ -35,7 +37,7 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 			if (appointment == null)
 				throw new ArgumentNullException(nameof(appointment));
 
-			return new AppointmentConfirmation
+			var AppointmentConfirmation = new AppointmentConfirmation
 			{
 				Id = appointment.Id,
 				SlotId = appointment.SlotId,
@@ -44,6 +46,10 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 				AppointmentStatus = AppointmentStatus.Confirmed,
 				ReservedAt = appointment.ReservedAt
 			};
+			var entity = AppointmentConfirmation.ToEntity();
+			InMemoryDb.AppointmentConfirmation.Add(entity);
+			return entity.ToModel();
+
 		}
 
 		public async Task<AppointmentConfirmation> CancelUpComingAppointment(Appointment appointment)
@@ -51,7 +57,7 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 			if (appointment == null)
 				throw new ArgumentNullException(nameof(appointment));
 
-			return new AppointmentConfirmation
+			var AppointmentConfirmation = new AppointmentConfirmation
 			{
 				Id = appointment.Id,
 				SlotId = appointment.SlotId,
@@ -60,6 +66,9 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 				AppointmentStatus = AppointmentStatus.Cancelled,
 				ReservedAt = appointment.ReservedAt
 			};
+			var entity = AppointmentConfirmation.ToEntity();
+			InMemoryDb.AppointmentConfirmation.Add(entity);
+			return entity.ToModel();
 		}
 	}
 }
