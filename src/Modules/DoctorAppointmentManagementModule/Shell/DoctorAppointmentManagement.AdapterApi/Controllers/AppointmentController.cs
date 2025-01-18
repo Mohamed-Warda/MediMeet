@@ -1,4 +1,5 @@
-﻿using DoctorAppointmentManagement.Core.InPutPorts.Services;
+﻿using DoctorAppointmentManagement.Core.Dtos;
+using DoctorAppointmentManagement.Core.InPutPorts.Services;
 using DoctorAppointmentManagement.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,14 +25,14 @@ public class AppointmentController : ControllerBase
 	}
 
 	[HttpPost("CompleteUpcomingAppointment")]
-	public async Task<IActionResult> CompleteUpcomingAppointment(Appointment appointment)
+	public async Task<IActionResult> CompleteUpcomingAppointment(AppointmentConfirmationDto appointmentConfirmationDto)
 	{
-		return Ok(await _appointmentServices.CompleteUpcomingAppointment(appointment));
+		return Ok(await _appointmentServices.CompleteUpcomingAppointment(appointmentConfirmationDto));
 	}
 
 	[HttpPost("CancelUpcomingAppointment")]
-	public async Task<IActionResult> CancelUpcomingAppointment(Appointment appointment)
+	public async Task<IActionResult> CancelUpcomingAppointment(AppointmentConfirmationDto appointmentConfirmationDto)
 	{
-		return Ok(await _appointmentServices.CancelUpcomingAppointment(appointment));
+		return Ok(await _appointmentServices.CancelUpcomingAppointment(appointmentConfirmationDto));
 	}
 }

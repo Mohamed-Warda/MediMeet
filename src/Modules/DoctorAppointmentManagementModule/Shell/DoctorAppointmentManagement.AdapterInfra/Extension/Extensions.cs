@@ -9,7 +9,8 @@ namespace DoctorAppointmentManagement.AdapterInfra.Extension
 		{
 			return new AppointmentConfirmationEntity
 			{
-				Id = appointment.Id,
+				Id = Guid.NewGuid(),
+				AppointmentId = appointment.AppointmentId,
 				SlotId = appointment.SlotId,
 				PatientId = appointment.PatientId,
 				PatientName = appointment.PatientName,
@@ -22,7 +23,7 @@ namespace DoctorAppointmentManagement.AdapterInfra.Extension
 		{
 			return new AppointmentConfirmation
 			{
-				Id = appointment.Id,
+				AppointmentId = appointment.AppointmentId,
 				SlotId = appointment.SlotId,
 				PatientId = appointment.PatientId,
 				PatientName = appointment.PatientName,

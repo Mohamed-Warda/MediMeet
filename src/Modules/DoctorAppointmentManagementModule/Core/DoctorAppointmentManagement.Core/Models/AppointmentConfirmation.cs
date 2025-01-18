@@ -6,12 +6,12 @@ namespace DoctorAppointmentManagement.Core.Models
 	public class AppointmentConfirmation
 	{
 		public Guid Id { get; set; }
+		public Guid AppointmentId { get; set; }
 		public Guid SlotId { get; set; }
 		public int PatientId { get; set; }
 		public string PatientName { get; set; }
 		public AppointmentStatus AppointmentStatus { get; set; }
-		public Guid CanceledBy { get; set; }
-		public Guid ConfirmedBy { get; set; }
+		public DateTime UpdatedAt { get; set; }
 		public string? Comments { get; set; }
 		public DateTime ReservedAt { get; set; }
 	}

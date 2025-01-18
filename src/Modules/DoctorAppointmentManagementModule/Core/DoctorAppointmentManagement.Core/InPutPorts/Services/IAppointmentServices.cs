@@ -1,11 +1,12 @@
-﻿using DoctorAppointmentManagement.Core.Models;
+﻿using DoctorAppointmentManagement.Core.Dtos;
+using DoctorAppointmentManagement.Core.Models;
 
 namespace DoctorAppointmentManagement.Core.InPutPorts.Services;
 
 public interface IAppointmentServices
 {
-	Task<List<Appointment>> GetUpcomingAppointments();
-	Task<AppointmentConfirmation> CompleteUpcomingAppointment(Appointment appointment);
-	Task<AppointmentConfirmation> CancelUpcomingAppointment(Appointment appointment);
+	Task<List<AppointmentConfirmationDto>> GetUpcomingAppointments();
+	Task<AppointmentConfirmation> CompleteUpcomingAppointment(AppointmentConfirmationDto appointmentConfirmationDto);
+	Task<AppointmentConfirmation> CancelUpcomingAppointment(AppointmentConfirmationDto appointmentConfirmationDto);
 
 }

@@ -2,6 +2,7 @@
 using DoctorAppointmentManagement.AdapterInfra.Database;
 using DoctorAppointmentManagement.AdapterInfra.Extension;
 using DoctorAppointmentManagement.Core.Domain.Enums;
+using DoctorAppointmentManagement.Core.Dtos;
 using DoctorAppointmentManagement.Core.Models;
 using DoctorAppointmentManagement.Core.OutputPorts.IRepository;
 using DoctorAppointmentManagement.Shared.IntegrationEvents;
@@ -22,12 +23,12 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 
 
 
-		public async Task<List<Appointment>> GetUpComingAppointments()
+		public async Task<List<AppointmentConfirmationDto>> GetUpComingAppointments()
 		{
 			var entity = await _appointmentBookingApi.GetUpComingAppointments();
-			var models = entity.Select(a => new Appointment()
+			var models = entity.Select(a => new AppointmentConfirmationDto()
 			{
-				Id = a.Id,
+				AppointmentId = a.Id,
 				PatientId = a.PatientId,
 				PatientName = a.PatientName,
 				ReservedAt = a.ReservedAt,
@@ -36,47 +37,50 @@ namespace DoctorAppointmentManagement.AdapterInfra.Repository
 			return models;
 		}
 
-		public async Task<AppointmentConfirmation> CompleteUpComingAppointment(Appointment appointment)
+		public async Task<AppointmentConfirmation> CompleteUpComingAppointment(AppointmentConfirmationDto appointmentConfirmationDto)
 		{
-			if (appointment == null)
-				throw new ArgumentNullException(nameof(appointment));
+			if (appointmentConfirmationDto == null)
+				throw new ArgumentNullException(nameof(appointmentConfirmationDto));
 
 			var AppointmentConfirmation = new AppointmentConfirmation
 			{
-				Id = appointment.Id,
-				SlotId = appointment.SlotId,
-				PatientId = appointment.PatientId,
-				PatientName = appointment.PatientName,
+				Id = Guid.NewGuid(),
+				UpdatedAt = DateTime.Now,
+				Comments = appointmentConfirmationDto.Comments,
+				AppointmentId = appointmentConfirmationDto.AppointmentId,
+				SlotId = appointmentConfirmationDto.SlotId,
+				PatientId = appointmentConfirmationDto.PatientId,
+				PatientName = appointmentConfirmationDto.PatientName,
 				AppointmentStatus = AppointmentStatus.Confirmed,
-				ReservedAt = appointment.ReservedAt
+				ReservedAt = appointmentConfirmationDto.ReservedAt
 			};
-			//update appoint cofirmetion
 			var entity = AppointmentConfirmation.ToEntity();
 			InMemoryDb.AppointmentConfirmation.Add(entity);
-			await _mediator.Publish(new  AppointmentConfirmedEvent(appointment.Id));
+			await _mediator.Publish(new  AppointmentConfirmedEvent(appointmentConfirmationDto.AppointmentId));
 			return entity.ToModel();
 
 		}
 
-		public async Task<AppointmentConfirmation> CancelUpComingAppointment(Appointment appointment)
+		public async Task<AppointmentConfirmation> CancelUpComingAppointment(AppointmentConfirmationDto appointmentConfirmationDto)
 		{
-			if (appointment == null)
-				throw new ArgumentNullException(nameof(appointment));
+			if (appointmentConfirmationDto == null)
+				throw new ArgumentNullException(nameof(appointmentConfirmationDto));
 
 			var AppointmentConfirmation = new AppointmentConfirmation
 			{
-				Id = appointment.Id,
-				SlotId = appointment.SlotId,
-				PatientId = appointment.PatientId,
-				PatientName = appointment.PatientName,
+				Id = Guid.NewGuid(),
+				UpdatedAt = DateTime.Now,
+				Comments = appointmentConfirmationDto.Comments,
+				AppointmentId = appointmentConfirmationDto.AppointmentId,
+				SlotId = appointmentConfirmationDto.SlotId,
+				PatientId = appointmentConfirmationDto.PatientId,
+				PatientName = appointmentConfirmationDto.PatientName,
 				AppointmentStatus = AppointmentStatus.Cancelled,
-				ReservedAt = appointment.ReservedAt
+				ReservedAt = appointmentConfirmationDto.ReservedAt
 			};
-			//delete the appintment from other module 
-			// delete slot  
 			var entity = AppointmentConfirmation.ToEntity();
 			InMemoryDb.AppointmentConfirmation.Add(entity);
-			 await _mediator.Publish(new  AppointmentCanceledEvent(appointment.Id,appointment.SlotId));
+			 await _mediator.Publish(new  AppointmentCanceledEvent(appointmentConfirmationDto.AppointmentId,appointmentConfirmationDto.SlotId));
 			return entity.ToModel();
 		}
 	}

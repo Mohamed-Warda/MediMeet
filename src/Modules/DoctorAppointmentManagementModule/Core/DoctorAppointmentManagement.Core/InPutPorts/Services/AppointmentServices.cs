@@ -1,4 +1,5 @@
-﻿using DoctorAppointmentManagement.Core.Models;
+﻿using DoctorAppointmentManagement.Core.Dtos;
+using DoctorAppointmentManagement.Core.Models;
 using DoctorAppointmentManagement.Core.OutputPorts.IRepository;
 
 namespace DoctorAppointmentManagement.Core.InPutPorts.Services;
@@ -12,17 +13,17 @@ public class AppointmentServices : IAppointmentServices
 		_appointmentRepository = appointmentRepository;
 	}
 
-	public async Task<List<Appointment>> GetUpcomingAppointments()
+	public async Task<List<AppointmentConfirmationDto>> GetUpcomingAppointments()
 	{
 		return await _appointmentRepository.GetUpComingAppointments();
 	}
-	public async Task<AppointmentConfirmation> CompleteUpcomingAppointment(Appointment appointment)
+	public async Task<AppointmentConfirmation> CompleteUpcomingAppointment(AppointmentConfirmationDto appointmentConfirmationDto)
 	{
-		return await _appointmentRepository.CompleteUpComingAppointment(appointment);
+		return await _appointmentRepository.CompleteUpComingAppointment(appointmentConfirmationDto);
 	}
-	public async Task<AppointmentConfirmation> CancelUpcomingAppointment(Appointment appointment)
+	public async Task<AppointmentConfirmation> CancelUpcomingAppointment(AppointmentConfirmationDto appointmentConfirmationDto)
 	{
-		return await _appointmentRepository.CancelUpComingAppointment(appointment);
+		return await _appointmentRepository.CancelUpComingAppointment(appointmentConfirmationDto);
 	}
 
 
