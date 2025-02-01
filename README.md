@@ -36,7 +36,7 @@ The application must meet the following business requirements:
    - **Manage Appointments**: The doctor can mark appointments as completed or cancel them if necessary.
 
 ### 5. **Data Persistence**
-   - Use any database engine or even an in-memory list with no database.
+   - In Memeory Database.
 
 ---
 
@@ -49,13 +49,6 @@ The application must meet the following business requirements:
    - **Appointment Booking Module**: Clean Architecture
    - **Appointment Confirmation Module**: Simplest Architecture Possible
    - **Doctor Appointment Management Module**: Hexagonal Architecture
-
----
-
-## Deliverables
-
-- Push the complete source code to a source code repository (e.g., GitHub, GitLab, Bitbucket).
-- Ensure commits are incremental and reflect progress throughout development.
 
 ---
 
